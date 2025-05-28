@@ -1,0 +1,331 @@
+.poke-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .font-family {
+        font-family: 'Share Tech Mono', monospace;
+    };
+
+    h1 {
+       @extend .font-family;
+       color: #494948;
+    }
+
+    .poke-buttons {
+        margin-top: 64px;
+        display: flex;
+        justify-content: space-evenly;
+        gap: 24px;
+    }
+
+    @mixin poke-btn($svg-poke-icon) {
+        width: 64px;
+        height: 64px;
+        background-image: url($svg-poke-icon);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out;
+        outline: none;
+
+        &:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+        }
+
+        &.selected {
+            outline: 3px solid gold;
+            box-shadow: 0 0 12px gold;
+        }
+    }
+
+    .poke-btn.charmander {
+        @include poke-btn('/assets/images/icons/charmander_icon.svg');
+    }
+
+    .poke-btn.squirtle {
+        @include poke-btn('/assets/images/icons/squirtle_icon.svg');
+    }
+
+    .poke-btn.bulbasaur {
+        @include poke-btn('/assets/images/icons/bulbasaur_icon.svg');
+    }
+
+    .spot {
+        height: 542px;
+        width: 1050px;
+    }
+
+    .poke-battle-spot {
+        @extend .spot;
+        z-index: -1;
+        margin-top: 90px;
+        border-radius: 12px;
+        background-image: url('/assets/images/background_pokemon.svg');
+        position: absolute;
+    }
+
+    .position-oponents {
+        @extend .spot;
+        display: flex;
+        flex-flow: column-reverse;
+    }
+
+    .menu {
+        display: flex;
+        background-color: #283030;
+        box-shadow: 0px -8px 16px white;
+        margin-top: -20px;
+        border-radius: 0px 0px 20px 20px;
+        width: 1050px;
+        height: 230px;
+
+        @mixin sector (
+            $padding-top,
+            $padding-right,
+            $padding-bottom,
+            $padding-left,
+            $margin-top,
+            $margin-right,
+            $margin-bottom,
+            $margin-left,
+            $top-left-radius,
+            $top-right-radius,
+            $bottom-right-radius,
+            $bottom-left-radius,
+            $color
+
+        ) {
+            background-color: $color;
+            width: 50%;
+            display: flex;
+            padding: $padding-top $padding-right $padding-bottom $padding-left;
+            margin: $margin-top $margin-right $margin-bottom $margin-left;
+            border-radius: $top-left-radius $top-right-radius $bottom-right-radius $bottom-left-radius;
+
+            .content-alerts {
+                display: flex;
+                background-color: #285068;
+                width: 100%;
+                border-radius: 10px 0px 0px 10px;
+                border-top: 8px solid white;
+                border-bottom: 8px solid white;
+                border-left: 8px solid white;
+                padding: 8px;
+                flex-direction: column;
+
+                h2 {
+                    @extend .font-family;
+                    color: #fff;
+                }
+                p {
+                    @extend .font-family;
+                    color: #fff;
+                }
+            }
+
+            .content-options {
+                display: flex;
+                background-color: #f8f8f8;
+                width: 100%;
+                border-radius: 10px;
+                padding: 8px;
+                flex-direction: column;
+
+                h2 {
+                    @extend .font-family;
+                    color: #494948;
+                }
+
+                .pixel-button {
+                    @extend .font-family;
+                    background-color: #ff4141;
+                    color: white;
+                    font-size: 12px;
+                    border: 4px solid 293f09;
+                    box-shadow: 0 0 0 4px white, 0 0 0 8px 293f09;
+                    text-transform: uppercase;
+                    cursor: pointer;
+                    outline: none;
+                    width: 200px;
+                    height: 30px;
+                    text-align: center;
+
+                    align-items: self-end;
+                    align-self: center;
+
+                    &:hover {
+                        background-color: #cc0000;
+                    }
+
+                    &:active {
+                        transform: translateY(2px);
+                    }
+                }
+            }
+
+        }
+
+        .sector.left {
+            $padding-top: 12px;
+            $padding-right: 0px;
+            $padding-bottom: 12px;
+            $padding-left: 12px;
+            $margin-top: 8px;
+            $margin-right: 0px;
+            $margin-bottom: 8px;
+            $margin-left: 8px;
+            $top-left-radius: 10px;
+            $top-right-radius: 0px;
+            $bottom-right-radius: 0px;
+            $bottom-left-radius: 10px;
+            $color: #c8a848;
+
+            @include sector(
+                $padding-top,
+                $padding-right,
+                $padding-bottom,
+                $padding-left,
+                $margin-top,
+                $margin-right,
+                $margin-bottom,
+                $margin-left,
+                $top-left-radius,
+                $top-right-radius,
+                $bottom-right-radius,
+                $bottom-left-radius,
+                $color,
+            );
+        }
+
+        .sector.right {
+            $padding-top: 12px;
+            $padding-right: 12px;
+            $padding-bottom: 12px;
+            $padding-left: 12px;
+            $margin-top: 8px;
+            $margin-right: 8px;
+            $margin-bottom: 8px;
+            $margin-left: 8px;
+            $top-left-radius: 10px;
+            $top-right-radius: 10px;
+            $bottom-right-radius: 10px;
+            $bottom-left-radius: 10px;
+            $color: #706780;
+
+            border-left: 3px solid #8786c3;
+            border-top: 3px solid #8786c3;
+            border-right: 3px solid #41425b;
+            border-bottom: 3px solid #41425b;
+
+            @include sector(
+                $padding-top,
+                $padding-right,
+                $padding-bottom,
+                $padding-left,
+                $margin-top,
+                $margin-right,
+                $margin-bottom,
+                $margin-left,
+                $top-left-radius,
+                $top-right-radius,
+                $bottom-right-radius,
+                $bottom-left-radius,
+                $color
+            );
+        }
+    }
+    
+
+    @mixin attacking-pokemon ($svg-poke-attacking) {
+        width: 400px;
+        height: 400px;
+        position: relative;
+        top: 3%;
+        left: 12%;
+        background-image: url($svg-poke-attacking);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        border: none;
+        animation: idle-side 1s ease-in-out infinite;
+    }
+
+    .attacking-pokemon.charmander {
+        @include attacking-pokemon('/assets/images/pokemons/charmander_back.svg');
+    }
+
+    .attacking-pokemon.squirtle {
+        @include attacking-pokemon('/assets/images/pokemons/squirtle_back.svg');
+    }
+
+    .attacking-pokemon.bulbasaur {
+        @include attacking-pokemon('/assets/images/pokemons/bulbasaur_back.svg');
+    }
+
+    @mixin counter-pokemon ($svg-poke-counter) {
+        align-self: flex-end;
+        width: 250px;
+        height: 250px;
+        position: relative;
+        top: 24%;
+        right: 20%;
+        background-image: url($svg-poke-counter);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        border: none;
+        animation: idle-side 0.5s ease-in-out infinite;
+    }
+
+    .counter-pokemon.charmander {
+        @include counter-pokemon('/assets/images/pokemons/charmander_front.svg');
+    }
+
+    .counter-pokemon.squirtle {
+        @include counter-pokemon('/assets/images/pokemons/squirtle_front.svg');
+    }
+
+    .counter-pokemon.bulbasaur {
+        @include counter-pokemon('/assets/images/pokemons/bulbasaur_front.svg');
+    }
+
+    @mixin pokeball ($width, $height, $top, $right, $left, $speed) {
+        width: $width;
+        height: $height;
+        position: absolute;
+        top: $top;
+        right: $right;
+        left: $left;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url('/assets/images/pokeball.svg');
+        border: none;
+        animation: idle-side $speed ease-in-out infinite;
+    }
+
+    .pokeball.counter {
+        @include pokeball(64px, 64px, 36%, 20%, 64%, 0.25s);
+    }
+
+    .pokeball.attacker {
+         @include pokeball(100px, 100px, 60%, auto, 24%, 0.3s);
+    }
+
+   @keyframes idle-side {
+        0% {
+            transform: translateX(0);
+        }
+        50% {
+            transform: translateX(8px);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+}

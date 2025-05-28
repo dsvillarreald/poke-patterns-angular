@@ -1,0 +1,46 @@
+<div class="poke-content"> 
+  <h1>Poke {{pattern | titlecase}} Pattern</h1>
+  <div class="poke-buttons">
+    <button class="poke-btn bulbasaur" (click)="selectAttacker('bulbasaur')"></button>
+    <button class="poke-btn charmander" (click)="selectAttacker('charmander')"></button>
+    <button class="poke-btn squirtle" (click)="selectAttacker('squirtle')"></button>
+  </div>
+  <div class="poke-battle-spot">
+    <div class="position-oponents">
+      @if (loadingAttacker) {
+        <div class="pokeball attacker"></div>
+      }
+      @if (attacker && !loadingAttacker) {
+        <div class="attacking-pokemon" [ngClass]="attackerName"></div>
+      }
+      @if (loadingCounter) {
+        <div class="pokeball counter"></div>
+      }
+      @if (counter && !loadingCounter) {
+        <div class="counter-pokemon" [ngClass]="counterName"></div>
+      }
+    </div>
+    <div class="menu">
+      <div class="sector left">
+        <div class="content-alerts">
+          <h2>{{attakerAlert}}</h2>
+          @if (result) {
+            <p>{{resultAttak?.attakAction}}</p>
+            <p>{{resultAttak?.attackEffective}}</p>
+          }
+        </div>
+      </div>
+      <div class="sector right">
+        <div class="content-options">
+          <h2>{{counterAlert}}</h2>
+            @if (counterAlert) {
+              <button 
+                class="pixel-button"
+                (click)="attack()"
+              >Atacar!</button>
+            }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
