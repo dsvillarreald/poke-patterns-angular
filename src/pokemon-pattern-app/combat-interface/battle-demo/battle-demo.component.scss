@@ -55,6 +55,10 @@
         @include poke-btn('/assets/images/icons/bulbasaur_icon.svg');
     }
 
+    .poke-btn.pikachu {
+        @include poke-btn('/assets/images/icons/pikachu_icon.svg');
+    }
+
     .spot {
         height: 542px;
         width: 1050px;
@@ -82,7 +86,7 @@
         margin-top: -20px;
         border-radius: 0px 0px 20px 20px;
         width: 1050px;
-        height: 230px;
+        height: 248px;
 
         @mixin sector (
             $padding-top,
@@ -267,6 +271,10 @@
         @include attacking-pokemon('/assets/images/pokemons/bulbasaur_back.svg');
     }
 
+    .attacking-pokemon.pikachu {
+        @include attacking-pokemon('/assets/images/pokemons/pikachu_back.svg');
+    }
+
     @mixin counter-pokemon ($svg-poke-counter) {
         align-self: flex-end;
         width: 250px;
@@ -293,6 +301,11 @@
     .counter-pokemon.bulbasaur {
         @include counter-pokemon('/assets/images/pokemons/bulbasaur_front.svg');
     }
+
+    .counter-pokemon.pikachu {
+        @include counter-pokemon('/assets/images/pokemons/pikachu_front.svg');
+    }
+
 
     @mixin pokeball ($width, $height, $top, $right, $left, $speed) {
         width: $width;

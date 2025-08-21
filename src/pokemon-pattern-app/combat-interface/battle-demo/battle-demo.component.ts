@@ -2,15 +2,12 @@ import { NgClass, TitleCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AttackFactory } from '../../attacks-patterns/attack-decorator/factory/attack.factory';
 import { FireConcreteStrategy } from '../../attacks-patterns/attack-strategy/concretes/fire.concrete.strategy';
 import { GrassConcreteStrategy } from '../../attacks-patterns/attack-strategy/concretes/grass.concrete.strategy';
 import { WaterConcreteStrategy } from '../../attacks-patterns/attack-strategy/concretes/water.concrete.strategy';
 import { AttackContext } from '../../attacks-patterns/attack-strategy/context/attack.context';
-import { AttackExecutor } from '../../attacks-patterns/attack-template-method/attack.excecutor';
-import { IPokemon, BattleResult, pokemons, Patterns, typesAttaks } from '../../pokemon/pokemon.model';
+import { IPokemon, BattleResult, pokemons, typesAttaks } from '../../pokemon/pokemon.model';
 import { BattleService } from '../../service-app/battle.service';
-import { currentPattern, PatternType } from '../../service-app/pattern.signal';
 
 @Component({
   selector: 'app-battle-demo',
@@ -27,6 +24,7 @@ export class BattleDemoComponent {
   loadingCounter = false;
   result: BattleResult | null = null;
   attacking: boolean = false;
+  pattern: string = 'strategy';
 
   private sub = new Subscription();
 
@@ -71,19 +69,7 @@ export class BattleDemoComponent {
 
   attack(): void {
     this.attacking = true;
-    setTimeout(() => {
-        this.attacking = false;
-        switch (currentPattern()) {
-          case Patterns.STRATEGY:
-            return this.attackPatternStrategy();
-          case Patterns.DECORATE:
-            return this.attackPatternDecorate();
-          case Patterns.TEMPLATE:
-            return this.attackPatternTemplate();
-          default:
-            throw new Error('Tipo de Patrón no soportado');
-        }
-      }, 1500)
+    return this.attackPatternStrategy();
   }
 
   attackPatternStrategy (): void {
@@ -92,23 +78,8 @@ export class BattleDemoComponent {
     context.execute();
   }
 
-  attackPatternDecorate (): void {
-    if (!this.attacker || !this.counter) return;
-    const decoratedAttack = AttackFactory.create(this.attacker);
-    const result = decoratedAttack.attack(this.counter);
-    this.battleService.sendResult(result);
-  }
-
-  attackPatternTemplate (): void {
-    const result = AttackExecutor.executeAttack(
-    this.attacker?.attackingInfo.type ?? '',
-    this.counter?.attackingInfo.type ?? ''
-  );
-
-  this.battleService.sendResult(result);
-  }
-
   private buildAttackContext(attacker: IPokemon, opponent: IPokemon): AttackContext {
+    debugger
     switch (attacker.attackingInfo.type) {
       case typesAttaks.fire:
         return new AttackContext(new FireConcreteStrategy(opponent, this.battleService));
@@ -119,10 +90,6 @@ export class BattleDemoComponent {
       default:
         throw new Error('Tipo de Pokémon no soportado');
     }
-  }
-
-  get pattern(): PatternType {
-    return currentPattern() ?? '';
   }
 
   get attackerName(): string {
@@ -136,7 +103,7 @@ export class BattleDemoComponent {
   get attakerAlert(): string {
     if (!this.attackerName) return 'Selecciona un Pokemón...';
     if (!this.attacking) return `${this.attackerName.toLocaleUpperCase()}, ¡Yo te elijo!`;
-    return `${this.attackerName.toLocaleUpperCase()}, Usará un ataque basado en el ${this.pattern} pattern`;
+    return `${this.attackerName.toLocaleUpperCase()}, Usará un ataque basado en el Strategy pattern`;
   }
 
   get counterAlert(): string {

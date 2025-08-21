@@ -3,17 +3,12 @@ interface IAttacksEffectiveness {
   weakness: string,
 };
 
-export enum Patterns {
-  STRATEGY = 'strategy',
-  DECORATE = 'decorate',
-  TEMPLATE = 'template'
-
-};
-
 enum indexTypes {
   Fire = 0,
   Water = 1,
-  Grass = 2
+  Grass = 2,
+  //TODO: use to challenge
+  // Electric = 3
 };
 
 export interface IPokemon {
@@ -24,8 +19,9 @@ export interface IPokemon {
 export enum typesAttaks {
   fire = 'Fire',
   water = 'Water',
-  grass = 'Grass'
-
+  grass = 'Grass',
+  //TODO: use to challenge
+  // electric = 'Electric'
 };
 
 export interface BattleResult {
@@ -45,7 +41,12 @@ export const PokemonAttackType: IAttacksEffectiveness[] = [
   {
     type: typesAttaks.grass,
     weakness: typesAttaks.fire
-  }
+  },
+  //TODO: use to challenge
+  // {
+  //   type: typesAttaks.electric,
+  //   weakness: typesAttaks.electric
+  // },
 ];
 
 export const pokemons: IPokemon[] = [
@@ -61,6 +62,11 @@ export const pokemons: IPokemon[] = [
     name: 'squirtle',
     attackingInfo: PokemonAttackType[indexTypes.Water],
   },
+  //TODO: use to challenge
+  // {
+  //   name: 'pikachu',
+  //   attackingInfo: PokemonAttackType[indexTypes.Electric],
+  // },
 ];
 
 export const FireAttacks: string[] = [
@@ -84,8 +90,10 @@ export const GrassAttacks: string [] = [
   'Danza Pétalo'
 ];
 
-export const PoisonAttack: string [] = [
-  'Veneno mortal',
-  'Bola Lodo',
-  'Ray',
-];
+//TODO: use to challenge
+// export const ElectricAttack: string [] = [
+//   'Impactrueno',
+//   'Bola voltio',
+//   'Chispazo',
+//   'Trueno'
+// ];
