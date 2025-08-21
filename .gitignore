@@ -1,0 +1,26 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+package-lock.json
+
+# Angular build
+dist/
+tmp/
+out-tsc/
+
+# Environment files
+src/environments/*.local.ts
+
+# IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Misc
+.DS_Store
+Thumbs.db
